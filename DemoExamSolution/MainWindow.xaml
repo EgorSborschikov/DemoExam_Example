@@ -1,0 +1,74 @@
+﻿<Window x:Class="DemoExamSolution.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoExamSolution"
+        mc:Ignorable="d"
+        Icon="/Resources/Icon.ico"
+        FontFamily="Times New Roman"
+        Title="Авторизация" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#00FA9A">
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/Resources/Icon.png"/>
+                <TextBlock Text="Авторизация" Foreground="White" FontSize="20" FontWeight="ExtraBold" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Margin="10,0,0,0"/>
+                <Button x:Name="GuestLoginBtn"
+                        Content="Войти как гость"
+                        Margin="10"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Background="#7FFF00"
+                        Foreground="White"
+                        Click="GuestLoginBtn_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="White">
+            <StackPanel Margin="20">
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Введите свои учетные данные" HorizontalAlignment="Center"
+                           FontSize="20"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Логин:" Margin="0,5"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Background="LightGray"
+                         Height="20"
+                         Margin="5"
+                         x:Name="LoginTextBox"
+                         VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Пароль:" Margin="0,5"
+                           VerticalAlignment="Center"/>
+                <PasswordBox Grid.Row="1" Grid.Column="1"
+                         Background="LightGray"
+                         Height="20"
+                         Margin="5"
+                         x:Name="PasswordTextBox"
+                         VerticalAlignment="Center"/>
+
+                <Button x:Name="LoginBtn"
+                        Grid.Row="1"
+                        Width="230"
+                        Height="40"
+                        Margin="10"
+                        Content="Войти"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Background="#7FFF00"
+                        Foreground="White"
+                        Click="LoginBtn_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
