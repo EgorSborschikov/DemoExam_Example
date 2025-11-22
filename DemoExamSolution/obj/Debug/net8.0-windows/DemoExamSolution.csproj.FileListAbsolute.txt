@@ -152,3 +152,6 @@ C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\RoleWindows\AdminWin
 C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\RoleWindows\ClientWindow.baml
 C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\RoleWindows\GuestWindow.baml
 C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\RoleWindows\ManagerWindow.baml
+C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\DemoExamSolution.sourcelink.json
+C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\AdditionalWindows\ProductForm.g.cs
+C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\AdditionalWindows\ProductForm.baml

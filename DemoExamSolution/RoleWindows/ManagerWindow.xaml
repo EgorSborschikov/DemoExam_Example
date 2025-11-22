@@ -15,20 +15,103 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="#00FA9A">
-            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="BackBtn"
+            Grid.Column="0"
+            Grid.Row="0"
+            Content="← Назад"
+            Margin="15,0,0,0"
+            VerticalAlignment="Center"
+            Background="Transparent"
+            Foreground="White"
+            FontWeight="Bold"
+            FontSize="14"
+            BorderThickness="0"
+            Cursor="Hand"
+            Click="BackBtn_Click"/>
+
+            <StackPanel Grid.Column="1" 
+                Grid.Row="0"
+                Orientation="Horizontal" 
+                Margin="10" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center">
                 <TextBlock Text="Список товаров"  Foreground="White" FontSize="20" FontWeight="ExtraBold" 
-                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Margin="10,0,0,0"/>
+               VerticalAlignment="Center" HorizontalAlignment="Center"
+               Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2"
+                Grid.Row="0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,0,15,0">
+                <TextBlock x:Name="UserNameTextBlock"
+                   Text="{Binding CurrentUser.FullName}"
+                   Foreground="White"
+                   FontSize="12"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center">
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                Margin="10,5" 
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center">
+                <TextBlock Text="Сортировка и фильтрация"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,0"
+                   Foreground="White"/>
+                <ComboBox x:Name="SortCbx"
+                  Width="180"
+                  Height="25"
+                  SelectedValuePath="Tag"
+                  SelectionChanged="SortCbx_SelectionChanged">
+                    <ComboBoxItem Content="Без сортировки" Tag="none"/>
+                    <ComboBoxItem Content="Количество по возрастанию" Tag="quantity_asc"/>
+                    <ComboBoxItem Content="Количество по убыванию" Tag="quantity_decs"/>
+                </ComboBox>
+
+                <ComboBox x:Name="FilterCbx"
+                  Width="150"
+                  Height="25"
+                  Margin="0,0,10,0"
+                  SelectedValuePath="Tag"
+                  SelectionChanged="FilterCbx_SelectionChanged">
+                    <ComboBoxItem Content="Все поставщики" Tag="all"/>
+                    <ComboBoxItem Content="Kari" Tag="kari"/>
+                    <ComboBoxItem Content="Обувь для вас" Tag="shoes_for_you"/>
+                </ComboBox>
+
+                <TextBox x:Name="SearchTextBox"
+                 Width="200"
+                 Height="25"
+                 Padding="5"
+                 TextChanged="SearchTextBox_TextChanged"
+                 ToolTip="Поиск по названию, артикулу или описанию"/>
             </StackPanel>
         </Grid>
-
+        
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="ProductsListBox" Margin="10">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Gray" BorderThickness="1" Margin="0,5"
-                            Width="750" Height="120"
-                            HorizontalAlignment="Center">
+                    Width="750" Height="280"
+                    HorizontalAlignment="Center">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="White"/>
@@ -40,74 +123,129 @@
                                 </Style>
                             </Border.Style>
 
-                            <Grid Margin="10">
+                            <Grid Margin="15">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="120"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
 
-                                <Image Grid.Row="0" Grid.RowSpan="7" 
-                                   Grid.Column="0" 
-                                   Source="/Resources/picture.png"
-                                   MaxWidth="80" MaxHeight="80"/>
+                                <Border Grid.Column="0" 
+                                Background="#F5F5F5" 
+                                BorderBrush="#E0E0E0" 
+                                BorderThickness="1"
+                                CornerRadius="3"
+                                Width="100" Height="100"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top">
+                                    <Image Source="{Binding PhotoPath, FallbackValue=/Resources/picture.png}"
+                                   Stretch="Uniform"
+                                   MaxWidth="90" MaxHeight="90"/>
+                                </Border>
 
-                                <TextBlock Grid.Row="0" Grid.Column="2" 
-                                       Text="{Binding CategoryName}"
-                                       FontWeight="Bold" FontSize="14"
+                                <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                                    <!-- Категория и Наименование -->
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="{Binding CategoryName}" 
+                                           FontWeight="Bold" 
+                                           FontSize="14"/>
+                                        <TextBlock Text=" | " 
+                                           Foreground="Gray"/>
+                                        <TextBlock Text="{Binding ProductName}" 
+                                           FontWeight="Bold" 
+                                           FontSize="14"/>
+                                    </StackPanel>
+
+                                    <!-- Описание товара -->
+                                    <TextBlock Text="Описание товара:" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="11"
+                                       Foreground="Gray"
+                                       Margin="0,5,0,2"/>
+                                    <TextBlock Text="{Binding Description}" 
+                                       FontSize="11" 
+                                       TextWrapping="Wrap"
+                                       MaxHeight="30"
+                                       TextTrimming="CharacterEllipsis"
                                        Margin="0,0,0,5"/>
 
-                                <TextBlock Grid.Row="1" Grid.Column="2" 
-                                       Text="{Binding ProductName}"
-                                       FontWeight="Bold" FontSize="16"
+                                    <!-- Производитель -->
+                                    <TextBlock Text="Производитель:" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="11"
+                                       Foreground="Gray"
+                                       Margin="0,5,0,2"/>
+                                    <TextBlock Text="{Binding Manufacturer}" 
+                                       FontSize="11"
                                        Margin="0,0,0,5"/>
 
-                                <TextBlock Grid.Row="2" Grid.Column="2" 
-                                       Text="{Binding Description}"
-                                       FontSize="12" TextWrapping="Wrap"
-                                       Margin="0,0,0,5"
-                                       MaxHeight="40" TextTrimming="CharacterEllipsis"/>
+                                    <!-- Поставщик -->
+                                    <TextBlock Text="Поставщик:" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="11"
+                                       Foreground="Gray"
+                                       Margin="0,5,0,2"/>
+                                    <TextBlock Text="{Binding Supplier}" 
+                                       FontSize="11"
+                                       Margin="0,0,0,5"/>
 
-                                <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,2">
-                                    <TextBlock Text="Производитель: " FontWeight="SemiBold" FontSize="11"/>
-                                    <TextBlock Text="{Binding Manufacturer}" FontSize="11"/>
+                                    <!-- Цена -->
+                                    <TextBlock Text="Цена:" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="11"
+                                       Foreground="Gray"
+                                       Margin="0,5,0,2"/>
+                                    <TextBlock Text="{Binding Price, StringFormat={}{0:N2} руб.}" 
+                                       FontSize="11" 
+                                       FontWeight="Bold" 
+                                       Foreground="Red"
+                                       Margin="0,0,0,5"/>
+
+                                    <!-- Единица измерения -->
+                                    <TextBlock Text="Единица измерения:" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="11"
+                                       Foreground="Gray"
+                                       Margin="0,5,0,2"/>
+                                    <TextBlock Text="{Binding UnitOfMeasurement}" 
+                                       FontSize="11"
+                                       Margin="0,0,0,5"/>
+
+                                    <!-- Количество на складе -->
+                                    <TextBlock Text="Количество на складе:" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="11"
+                                       Foreground="Gray"
+                                       Margin="0,5,0,2"/>
+                                    <TextBlock Text="{Binding QuantityInStock}" 
+                                       FontSize="11" 
+                                       FontWeight="Bold"
+                                       Margin="0,0,0,5"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,2">
-                                    <TextBlock Text="Поставщик: " FontWeight="SemiBold" FontSize="11"/>
-                                    <TextBlock Text="{Binding Supplier}" FontSize="11"/>
-                                </StackPanel>
 
-                                <StackPanel Grid.Row="5" Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,2">
-                                    <TextBlock Text="Цена: " FontWeight="SemiBold" FontSize="11"/>
-                                    <TextBlock Text="{Binding Price}" FontSize="11" FontWeight="Bold" Foreground="Red"/>
-                                    <TextBlock Text=" руб. за " FontSize="11"/>
-                                    <TextBlock Text="{Binding UnitOfMeasurement}" FontSize="11"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal">
-                                    <TextBlock Text="В наличии: " FontWeight="SemiBold" FontSize="11"/>
-                                    <TextBlock Text="{Binding QuantityInStock}" FontSize="11" FontWeight="Bold"/>
-                                    <TextBlock Text=" шт." FontSize="11"/>
-                                </StackPanel>
-
-                                <Border Grid.Row="0" Grid.RowSpan="3" Grid.Column="3" 
-                                    Background="#FFF0F0" BorderBrush="#FFCCCC" BorderThickness="1"
-                                    CornerRadius="5" Margin="5">
+                                <Border Grid.Column="2" 
+                                BorderThickness="1"
+                                CornerRadius="5" 
+                                Width="80" Height="60"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top">
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="Скидка" FontSize="10" Foreground="Gray" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="{Binding Discount}" FontSize="18" FontWeight="Bold" 
-                                               Foreground="#2E8B57" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="%" FontSize="12" Foreground="#2E8B57" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Действующая скидка" 
+                                           FontSize="9" 
+                                           Foreground="Gray" 
+                                           HorizontalAlignment="Center"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"/>
+                                        <TextBlock Text="{Binding Discount}" 
+                                           FontSize="16" 
+                                           FontWeight="Bold" 
+                                           Foreground="#2E8B57" 
+                                           HorizontalAlignment="Center"/>
+                                        <TextBlock Text="%" 
+                                           FontSize="12" 
+                                           Foreground="#2E8B57" 
+                                           HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Border>
                             </Grid>
