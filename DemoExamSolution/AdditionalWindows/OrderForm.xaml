@@ -1,0 +1,79 @@
+﻿<Window x:Class="DemoExamSolution.AdditionalWindows.OrderForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoExamSolution.AdditionalWindows"
+        mc:Ignorable="d"
+        Icon="/Resources/Icon.ico"
+        FontFamily="Times New Roman"
+        Title="Добавление/редактирование заказа" Height="500" Width="400">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Номер заказа" Margin="0,5"/>
+            <TextBox x:Name="OrderNumberTxt" Margin="0,2,0,10"/>
+
+            <TextBlock Text="Номер заказа" Margin="0,5"/>
+            <ComboBox x:Name="ProductCbx" DisplayMemberPath="Articul" 
+                     SelectedValuePath="Id" Margin="0,2,0,10"/>
+
+            <TextBlock Text="Статус заказа*" Margin="0,5"/>
+            <ComboBox x:Name="StatusCbx" DisplayMemberPath="StatusName" 
+                     SelectedValuePath="Id" Margin="0,2,0,10"/>
+
+            <TextBlock Text="Пункт выдачи*" Margin="0,5"/>
+            <ComboBox x:Name="DeliveryPlaceCbx" Margin="0,2,0,10"
+                      SelectedValuePath="Id">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding City}"/>,
+                            <Run Text="{Binding Street}"/>,
+                            <Run Text="д."/>
+                            <Run Text="{Binding HomeNumber}"/>
+                            <Run Text="("/>
+                            <Run Text="{Binding Index}"/>
+                            <Run Text=")"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Text="Клиент*" Margin="0,5"/>
+            <ComboBox x:Name="ClientCbx" 
+                     Margin="0,2,0,10"
+                      SelectedValuePath="Id">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Surname}"/>
+                            <Run Text="{Binding Name}"/>
+                            <Run Text="{Binding Patronymic}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Text="Код получения*" Margin="0,5"/>
+            <TextBox x:Name="CodeTxt" Margin="0,2,0,10"/>
+
+            <TextBlock Text="Дата заказа*" Margin="0,5"/>
+            <DatePicker x:Name="OrderDatePicker" Margin="0,2,0,10"/>
+
+            <TextBlock Text="Дата выдачи*" Margin="0,5"/>
+            <DatePicker x:Name="DeliveryDatePicker" Margin="0,2,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="SaveBtn" Background="#00FA9A" Foreground="White" Content="Сохранить" Width="80" Height="30" 
+                    Margin="5" Click="SaveBtn_Click"/>
+            <Button x:Name="CancelBtn" Content="Отмена" Width="80" Height="30" 
+                    Margin="5" Click="CancelBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

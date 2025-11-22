@@ -16,10 +16,12 @@ namespace DemoExamSolution.RoleWindows
     {
         public User CurrentUser { get; set; }
         private ObservableCollection<ProductViewModel> _allProducts;
+        private readonly AppDbContext _context;
 
         public AdminWindow()
         {
             InitializeComponent();
+            _context= new AppDbContext();
         }
 
         // Дополнительный конструктор класса для отображения ФИО пользователя
@@ -49,44 +51,41 @@ namespace DemoExamSolution.RoleWindows
             // Загрузка данных о продуктах
             try
             {
-                using (var context = AppDbContext.GetContext())
-                {
-                    var productsCount = context.Products.Count();
-                    MessageBox.Show($"Всего товаров: {productsCount}");
+                var productsCount = _context.Products.Count();
+                MessageBox.Show($"Всего товаров: {productsCount}");
 
-                    var products = context.Products
-                        .Include(p => p.IdCategoryNavigation)
-                        .Include(p => p.IdManufacturerNavigation)
-                        .Include(p => p.IdSupplierNavigation)
-                        .Include(p => p.IdProductTypeNavigation)
-                        .AsEnumerable()
-                        .Select(p => new ProductViewModel
-                        {
-                            Id = p.Id,
-                            Articul = p.Articul,
-                            ProductName = p.IdProductTypeNavigation.Type, 
-                            CategoryName = p.IdCategoryNavigation.CategoryName,
-                            Description = p.Description,
-                            Manufacturer = p.IdManufacturerNavigation.ManufacturerName,
-                            Supplier = p.IdSupplierNavigation.SupplierName,
-                            Price = p.Price,
-                            UnitOfMeasurement = p.UnitOfMeasurement,
-                            QuantityInStock = p.QuantityInStock,
-                            Discount = p.Discount,
-                            PhotoPath = p.PhotoPath
-                        }).ToList();
-
-                    MessageBox.Show($"Загружено товаров: {products.Count}");
-                    foreach (var product in products)
+                var products = _context.Products
+                    .Include(p => p.IdCategoryNavigation)
+                    .Include(p => p.IdManufacturerNavigation)
+                    .Include(p => p.IdSupplierNavigation)
+                    .Include(p => p.IdProductTypeNavigation)
+                    .AsEnumerable()
+                    .Select(p => new ProductViewModel
                     {
-                        Debug.WriteLine($"Товар: {product.ProductName}, Цена: {product.Price}, Категория: {product.CategoryName}");
-                    }
+                        Id = p.Id,
+                        Articul = p.Articul,
+                        ProductName = p.IdProductTypeNavigation.Type,
+                        CategoryName = p.IdCategoryNavigation.CategoryName,
+                        Description = p.Description,
+                        Manufacturer = p.IdManufacturerNavigation.ManufacturerName,
+                        Supplier = p.IdSupplierNavigation.SupplierName,
+                        Price = p.Price,
+                        UnitOfMeasurement = p.UnitOfMeasurement,
+                        QuantityInStock = p.QuantityInStock,
+                        Discount = p.Discount,
+                        PhotoPath = p.PhotoPath
+                    }).ToList();
 
-                    _allProducts = new ObservableCollection<ProductViewModel>(products);
-                    ProductsListBox.ItemsSource = _allProducts;
-
-                    MessageBox.Show($"Успешно загружено товаров: {products.Count}");
+                MessageBox.Show($"Загружено товаров: {products.Count}");
+                foreach (var product in products)
+                {
+                    Debug.WriteLine($"Товар: {product.ProductName}, Цена: {product.Price}, Категория: {product.CategoryName}");
                 }
+
+                _allProducts = new ObservableCollection<ProductViewModel>(products);
+                ProductsListBox.ItemsSource = _allProducts;
+
+                MessageBox.Show($"Успешно загружено товаров: {products.Count}");
             }
             catch (Exception ex)
             {
@@ -251,6 +250,13 @@ namespace DemoExamSolution.RoleWindows
             bool hasSelection = ProductsListBox.SelectedItem != null;
             EditBtn.IsEnabled = hasSelection;
             DelBtn.IsEnabled = hasSelection;
+        }
+
+        private void OrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var orderWindow = new OrderWindow(CurrentUser, "admin");
+            orderWindow.Show();
+            this.Hide();
         }
     }
 }

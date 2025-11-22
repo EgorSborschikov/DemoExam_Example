@@ -1,0 +1,160 @@
+﻿<Window x:Class="DemoExamSolution.AdditionalWindows.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoExamSolution.AdditionalWindows"
+        mc:Ignorable="d"
+        Icon="/Resources/Icon.ico"
+        FontFamily="Times New Roman"
+        Title="Заказы" Height="450" Width="520">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#00FA9A">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="BackBtn"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Content="← Назад"
+                    Margin="15,0,0,0"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    FontSize="14"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Click="BackBtn_Click"/>
+            
+            <StackPanel Grid.Column="1" 
+                        Grid.Row="0"  
+                        Orientation="Horizontal"
+                        Margin="10"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                <TextBlock Text="Список заказов"  Foreground="White" FontSize="20" FontWeight="ExtraBold" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5" 
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                <Button x:Name="AddBtn"
+                        Content="Добавить заказ"
+                        Margin="15,0,0,0"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="AddBtn_Click"
+                        Visibility="Visible"/>
+
+                <Button x:Name="EditBtn"
+                        Content="Изменить заказ"
+                        Margin="15,0,0,0"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="EditBtn_Click"
+                        Visibility="Visible"/>
+
+                <Button x:Name="DelBtn"
+                        Content="Удалить заказ"
+                        Margin="15,0,0,0"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="DelBtn_Click"
+                        Visibility="Visible"/>
+            </StackPanel>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+            <ListBox x:Name="OrdersListBox" Margin="10"
+                     SelectionChanged="OrdersListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Gray" BorderThickness="1" Margin="0,5"
+                            Width="450" Height="100"
+                            HorizontalAlignment="Center">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#F0F8FF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <Grid Margin="15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0"
+                                            Margin="15,0,0,0">
+                                    <TextBlock Text="{Binding Articul}" 
+                                               FontWeight="Bold" 
+                                               FontSize="14"/>
+                                    <TextBlock Text="{Binding StatusName}" 
+                                               FontWeight="SemiBold" 
+                                               FontSize="11"
+                                               Foreground="Gray"
+                                               Margin="0,5,0,2"/>
+                                    <TextBlock Text="{Binding OrderAddress}" 
+                                               FontSize="11"
+                                               Margin="0,0,0,5"/>
+
+                                    <TextBlock Text="{Binding OrderDate}" 
+                                               FontWeight="SemiBold" 
+                                               FontSize="11"
+                                               Foreground="Gray"
+                                               Margin="0,5,0,2"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1"
+                                            Margin="15,0,0,0">
+                                    <TextBlock Text="{Binding DeliveryDate}" 
+                                               FontWeight="SemiBold" 
+                                               FontSize="11"
+                                               Foreground="Gray"
+                                               Margin="0,5,0,2"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+</Window>

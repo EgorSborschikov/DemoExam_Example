@@ -155,3 +155,7 @@ C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\RoleWindows\ManagerW
 C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\DemoExamSolution.sourcelink.json
 C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\AdditionalWindows\ProductForm.g.cs
 C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\AdditionalWindows\ProductForm.baml
+C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\AdditionalWindows\OrderWindow.g.cs
+C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\AdditionalWindows\OrderWindow.baml
+C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\AdditionalWindows\OrderForm.g.cs
+C:\Study\DemoExam\DemoExamSolution\obj\Debug\net8.0-windows\AdditionalWindows\OrderForm.baml
