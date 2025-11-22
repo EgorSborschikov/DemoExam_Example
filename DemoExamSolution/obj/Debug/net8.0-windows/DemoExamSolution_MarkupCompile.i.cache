@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Study\DemoExam\DemoExamSolution\App.xaml
-5-1939985624
+6-1778966328
 
-21-148853978
+23-1858229894
 228-2048068850
-MainWindow.xaml;RoleWindows\AdminWindow.xaml;RoleWindows\ClientWindow.xaml;RoleWindows\GuestWindow.xaml;RoleWindows\ManagerWindow.xaml;
+AdditionalWindows\ProductForm.xaml;MainWindow.xaml;RoleWindows\AdminWindow.xaml;RoleWindows\ClientWindow.xaml;RoleWindows\GuestWindow.xaml;RoleWindows\ManagerWindow.xaml;
 
-False
+True
 
