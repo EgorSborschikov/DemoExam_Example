@@ -6,6 +6,8 @@ namespace DemoExamSolution.Entities;
 
 public partial class AppDbContext : DbContext
 {
+    private static AppDbContext context;
+
     public AppDbContext()
     {
     }
@@ -13,6 +15,15 @@ public partial class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
+    }
+
+    public static AppDbContext GetContext()
+    {
+        if (context == null)
+        {
+            context = new AppDbContext();
+        }
+        return context;
     }
 
     public virtual DbSet<Category> Categories { get; set; }
