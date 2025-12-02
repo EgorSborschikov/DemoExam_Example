@@ -98,7 +98,7 @@
 
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
             <ListBox x:Name="OrdersListBox" Margin="10"
-                     SelectionChanged="OrdersListBox_SelectionChanged">
+                     SelectionChanged="OrdersListBox_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=1}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Gray" BorderThickness="1" Margin="0,5"
@@ -132,8 +132,7 @@
                                                Foreground="Gray"
                                                Margin="0,5,0,2"/>
                                     <TextBlock Text="{Binding OrderAddress}" 
-                                               FontSize="11"
-                                               Margin="0,0,0,5"/>
+                                               FontSize="11"/>
 
                                     <TextBlock Text="{Binding OrderDate}" 
                                                FontWeight="SemiBold" 

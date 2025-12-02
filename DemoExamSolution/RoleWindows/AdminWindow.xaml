@@ -171,11 +171,11 @@
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <ListBox x:Name="ProductsListBox" Margin="10"
-                     SelectionChanged="ProductsListBox_SelectionChanged">
+                     SelectionChanged="ProductsListBox_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=1}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Gray" BorderThickness="1" Margin="0,5"
-                            Width="750" Height="280"
+                            Width="550" Height="160"
                             HorizontalAlignment="Center">
                             <Border.Style>
                                 <Style TargetType="Border">
@@ -220,65 +220,69 @@
                                                    FontSize="14"/>
                                     </StackPanel>
 
-                                    <TextBlock Text="Описание товара:" 
-                                               FontWeight="SemiBold" 
-                                               FontSize="11"
-                                               Foreground="Gray"
-                                               Margin="0,5,0,2"/>
-                                    <TextBlock Text="{Binding Description}" 
-                                               FontSize="11" 
-                                               TextWrapping="Wrap"
-                                               MaxHeight="30"
-                                               TextTrimming="CharacterEllipsis"
-                                               Margin="0,0,0,5"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="Описание товара:" 
+                                           FontWeight="SemiBold" 
+                                           FontSize="11"
+                                           Foreground="Gray"
+                                           Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding Description}" 
+                                           FontSize="11" 
+                                           TextWrapping="Wrap"
+                                           MaxHeight="30"
+                                           TextTrimming="CharacterEllipsis"
+                                           Margin="0,0,0,0"/>
+                                    </StackPanel>
 
-                                    <TextBlock Text="Производитель:" 
-                                               FontWeight="SemiBold" 
-                                               FontSize="11"
-                                               Foreground="Gray"
-                                               Margin="0,5,0,2"/>
-                                    <TextBlock Text="{Binding Manufacturer}" 
-                                               FontSize="11"
-                                               Margin="0,0,0,5"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="Производитель:" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="11"
+                                                   Foreground="Gray"
+                                                   Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding Manufacturer}" 
+                                                   FontSize="11"/>
+                                    </StackPanel>
 
-                                    <TextBlock Text="Поставщик:" 
-                                               FontWeight="SemiBold" 
-                                               FontSize="11"
-                                               Foreground="Gray"
-                                               Margin="0,5,0,2"/>
-                                    <TextBlock Text="{Binding Supplier}" 
-                                               FontSize="11"
-                                               Margin="0,0,0,5"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="Поставщик:" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="11"
+                                                   Foreground="Gray"
+                                                   Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding Supplier}" 
+                                                    FontSize="11"/>
+                                    </StackPanel>
 
-                                    <TextBlock Text="Цена:" 
-                                               FontWeight="SemiBold" 
-                                               FontSize="11"
-                                               Foreground="Gray"
-                                               Margin="0,5,0,2"/>
-                                    <TextBlock Text="{Binding Price, StringFormat={}{0:N2} руб.}" 
-                                               FontSize="11" 
-                                               FontWeight="Bold" 
-                                               Foreground="Red"
-                                               Margin="0,0,0,5"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="Цена:" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="11"
+                                                   Foreground="Gray"
+                                                   Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding Price, StringFormat={}{0:N2} руб.}" 
+                                                    FontSize="11"/>
+                                    </StackPanel>
 
-                                    <TextBlock Text="Единица измерения:" 
-                                               FontWeight="SemiBold" 
-                                               FontSize="11"
-                                               Foreground="Gray"
-                                               Margin="0,5,0,2"/>
-                                    <TextBlock Text="{Binding UnitOfMeasurement}" 
-                                               FontSize="11"
-                                               Margin="0,0,0,5"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="Единица измерения:" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="11"
+                                                   Foreground="Gray"
+                                                   Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding UnitOfMeasurement}" 
+                                                   FontSize="11"/>
+                                    </StackPanel>
 
-                                    <TextBlock Text="Количество на складе:" 
-                                               FontWeight="SemiBold" 
-                                               FontSize="11"
-                                               Foreground="Gray"
-                                               Margin="0,5,0,2"/>
-                                    <TextBlock Text="{Binding QuantityInStock}" 
-                                               FontSize="11" 
-                                               FontWeight="Bold"
-                                               Margin="0,0,0,5"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="Количество на складе:" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="11"
+                                                   Foreground="Gray"
+                                                   Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding QuantityInStock}" 
+                                                   FontSize="11"/>
+                                    </StackPanel>
                                 </StackPanel>
 
 
